@@ -24,7 +24,7 @@ function addTask(description) {
     const waktuSekarang = new Date().toISOString();
 
     if (!description) {
-        console.log("Error: deskripsi task wajib diisi");
+        console.log("Error: task description is required");
         return;
     }
 
@@ -40,7 +40,7 @@ function addTask(description) {
 
     saveTask(tasks);
 
-    console.log("Task berhasil ditambahkan");
+    console.log("Task added successfully (ID: " + newTask.id + ")");
 }
 
 
@@ -48,7 +48,7 @@ function listTask() {
     const tasks = readTask();
 
     if (tasks.length === 0) {
-        console.log("Belum ada task");
+        console.log("No tasks found");
         return;
     }
 
@@ -66,11 +66,11 @@ function updateTask(id, newDescription) {
             tasks[i].updatedAt = new Date().toISOString();
 
             saveTask(tasks);
-            console.log("Tasks Berhasil diUpdate");
+            console.log("Task updated successfully");
             return;
         }
     }
-    console.log("Tasks tidak ditemukan")
+    console.log("Task not found");
     
 }
 
@@ -87,7 +87,7 @@ function deleteTask(id) {
     
     saveTask(newTasks);
 
-    console.log("Task berhasil dihapus");
+    console.log("Task deleted successfully");
 }
 
 function markTask(id, status) {
@@ -98,11 +98,11 @@ function markTask(id, status) {
             tasks[i].updatedAt = new Date().toISOString();
             
             saveTask(tasks);
-            console.log("Status task berhasil diubah menjadi:", status);
+            console.log("Task status updated to:", status);
             return;
         }
     }
-    console.log("Task tidak ditemukan");
+    console.log("Task not found");
 }
 
 const command = process.argv[2];
@@ -122,6 +122,6 @@ if (command === "add") {
 } else if (command === "mark-done") {
     markTask(input1, "done");
 } else {
-    console.log("Command tidak dikenali");
-    console.log('Contoh: node task-cli.js add "Belajar Node.js"');
+   console.log("Unknown command");
+   console.log('Example: node task-cli.js add "Learn Node.js"');
 }
